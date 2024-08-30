@@ -1,10 +1,12 @@
 package com.quarkus.starting;
 
+import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import org.jboss.logging.Logger;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,14 +15,16 @@ import java.util.Optional;
 @Produces(MediaType.APPLICATION_JSON)
 public class BookResource {
 
+    @Inject
+    BookRepository repository;
+
+    @Inject
+    Logger logger;  //using Jboss one if you tried to import from others will fail
+
     @GET
     public List<Book> getAllBooks() {
-        return List.of(
-                new Book(1, "Love Next Door", "Korean Author", 2024, "empty"),
-                new Book(2, "Alchemy Of Souls", "Korean Author", 2019, "empty"),
-                new Book(2, "Marry My Husband", "Korean Author", 2023, "empty"),
-                new Book(3, "Queen Of Tears", "Korean Author", 2024, "empty")
-        );
+        logger.info("Get all books");
+        return repository.getAllBooks();
     }
 
 
@@ -28,7 +32,8 @@ public class BookResource {
     @Path("/count")
     @Produces(MediaType.TEXT_PLAIN)
     public int countAllBooks() {
-        return getAllBooks().size();
+        logger.info("Count all books");
+        return repository.countAllBooks();
     }
 
 
@@ -36,6 +41,7 @@ public class BookResource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Optional<Book> getBookById(@PathParam("id") int id) {
-        return getAllBooks().stream().filter(book -> book.id==id).findFirst();
+        logger.info("Get book by id: " + id);
+        return repository.getBookById(id);
     }
 }
