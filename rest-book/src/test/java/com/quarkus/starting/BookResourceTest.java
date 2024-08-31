@@ -31,7 +31,7 @@ public class BookResourceTest {
     public void testGetBookByIdEndpoint() {
         given().header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON).pathParam("id", 1)
                 .when().get("/api/books/{id}")
-                .then().statusCode(200).body("title", is("Love Next Door"));
+                .then().statusCode(200).body("title", is("Love Next Door")).body("genre", is("Korean Drama"));
     }
 
 }
