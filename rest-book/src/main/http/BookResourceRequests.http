@@ -1,3 +1,11 @@
 ### GET
 GET {{url}}/api/books
 Content-Type: application/json
+
+### GET
+GET {{url}}/api/books/count
+Content-Type: text/plain
+
+### GET
+GET {{url}}/api/books/{{id}}
+Content-Type: application/json
