@@ -1,4 +1,4 @@
-# quarkus-starting-with-quarkus
+# starting-with-quarkus
 This is a practice Quarkus Application depending on  Udemy Course  https://www.udemy.com/course/quarkus-starting-with-quarkus/
 
 
